@@ -1,4 +1,4 @@
-# RusAlpha / 
+# RusAlpha / РуссАлфа
 
 Quick and dirty program for practicing the Russian alphabet.
 
