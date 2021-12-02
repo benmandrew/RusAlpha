@@ -10,10 +10,14 @@ Running:
     
     python3 main.py
 
-For each letter shown, type it exactly and press enter.
+For each word shown, type it exactly and press enter.
 
 ### Command-Line Arguments
-Randomise the order that letters are shown:
+Use the word corpus instead of just letters
+
+    --words
+
+Randomise the order that words are shown:
 
     --random
 
