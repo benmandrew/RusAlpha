@@ -2,7 +2,6 @@
 import sys, random, codecs
 from typing import List
 
-
 alphabet: List[List[str]] = [
   ["\u0410", "\u0430"], # А
   ["\u0411", "\u0431"], # Б
@@ -38,6 +37,35 @@ alphabet: List[List[str]] = [
   ["\u042F", "\u044F"]  # Я
 ]
 
+def must_display_help_text() -> bool:
+  return (
+    "--help" in sys.argv or
+    "-h" in sys.argv or
+    not ("--words" in sys.argv or
+      "--loop" in sys.argv or
+      "--random" in sys.argv))
+
+def print_help_text():
+  print("""NAME
+    RusAlpha - Practice Russian typing
+
+SYNOPSIS
+    python3 main.py [--options]
+
+DESCRIPTION
+     In a loop, prints a Russian character string, which
+     you  must then type exactly.  By default the corpus
+     is the Russian alphabet, and is printed in order.
+
+OPTIONS
+     --words    Use the corpus of  Russian words instead
+                of the alphabet.
+     
+     --loop     Once corpus is exhausted, start again.
+     
+     --random   Randomise order of strings in corpus.
+     
+     --help     Display this help text and exit.""")
 
 def read_word_corpus() -> List[List[str]]:
   s = ""
@@ -46,14 +74,12 @@ def read_word_corpus() -> List[List[str]]:
   corpus = s.split("\n")
   return [[word] for word in corpus]
 
-
 def print_list(l: List[str]) -> None:
   for i, s in enumerate(l):
     if i != 0:
       print(", ", end="")
     print("{}".format(s), end="")
   print(" - ", end="")
-
 
 def main(corpus):
   indices = [i for i in range(len(corpus))]
@@ -71,9 +97,11 @@ def main(corpus):
         print_list(corpus[i])
         user_input = input()
 
-
 if __name__ == "__main__":
   corpus = alphabet
+  if must_display_help_text():
+    print_help_text()
+    exit()
   if "--words" in sys.argv:
     corpus = read_word_corpus()
   main(corpus)
